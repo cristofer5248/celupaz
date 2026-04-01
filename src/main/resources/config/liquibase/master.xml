@@ -12,7 +12,25 @@
     <property name="timeType" value="time(6)" dbms="mariadb"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032640_added_entity_Alma.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032641_added_entity_CellType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032642_added_entity_Cell.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032643_added_entity_Member.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032644_added_entity_Iglesia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032645_added_entity_Privilege.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032646_added_entity_AlmaHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032647_added_entity_Attendance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032648_added_entity_Planificacion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032649_added_entity_MemberCelula.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032650_added_entity_PlaniMaster.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032651_added_entity_RolCelula.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20260328032642_added_entity_constraints_Cell.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032643_added_entity_constraints_Member.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032646_added_entity_constraints_AlmaHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032647_added_entity_constraints_Attendance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032648_added_entity_constraints_Planificacion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260328032649_added_entity_constraints_MemberCelula.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

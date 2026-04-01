@@ -21,6 +21,9 @@ logging:
     com.chrisgeek.celupaz: DEBUG
 
 spring:
+  docker:
+    compose:
+      enabled: false
   devtools:
     restart:
       enabled: true
@@ -32,7 +35,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mariadb://localhost:3306/celupazmaster?useLegacyDatetimeCode=false
+    url: jdbc:mariadb://localhost:3306/celupaz1?useLegacyDatetimeCode=false
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -43,10 +46,14 @@ spring:
         useServerPrepStmts: true
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
-    host: localhost
-    port: 25
+    host: sandbox.smtp.mailtrap.io
+    username: f2f3b4131af12f
+    password: 6b3e51aedeb872
+    port: 2525
+    from: admin@celupazdev.com # Puede ser cualquier nombre para pruebas
+    base-url: http://localhost:9000 # Importante para que el link del correo funcione
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:

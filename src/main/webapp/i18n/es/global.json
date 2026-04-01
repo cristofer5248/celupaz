@@ -7,7 +7,19 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
+        "alma": "Alma",
+        "cellType": "Cell Type",
+        "cell": "Cell",
+        "member": "Member",
+        "iglesia": "Iglesia",
+        "privilege": "Privilege",
+        "almaHistory": "Alma History",
+        "attendance": "Attendance",
+        "planificacion": "Planificacion",
+        "memberCelula": "Member Celula",
+        "planiMaster": "Plani Master",
+        "rolCelula": "Rol Celula"
       },
       "account": {
         "main": "Cuenta",

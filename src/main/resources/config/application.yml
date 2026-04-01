@@ -94,7 +94,7 @@ spring:
     name: celupazmaster
   docker:
     compose:
-      enabled: true
+      enabled: false
       lifecycle-management: start-only
       file: src/main/docker/services.yml
   profiles:
@@ -104,7 +104,7 @@ spring:
     active: '@spring.profiles.active@'
     group:
       dev:
-        - secret-samples
+        - secret
         - api-docs
         # Uncomment to activate TLS for the dev profile
         #- tls
