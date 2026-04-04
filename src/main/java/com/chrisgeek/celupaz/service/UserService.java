@@ -33,9 +33,7 @@ public class UserService {
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final AuthorityRepository authorityRepository;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
@@ -49,7 +47,6 @@ public class UserService {
         return userRepository
             .findOneByActivationKey(key)
             .map(user -> {
-                // activate given user for the registration key.
                 user.setActivated(true);
                 user.setActivationKey(null);
                 LOG.debug("Activated user: {}", user);
@@ -101,7 +98,6 @@ public class UserService {
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
-        // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
@@ -110,9 +106,7 @@ public class UserService {
         }
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
-        // new user is not active
         newUser.setActivated(false);
-        // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
@@ -141,7 +135,7 @@ public class UserService {
         }
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
-            user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
+            user.setLangKey(Constants.DEFAULT_LANGUAGE);
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
@@ -150,6 +144,11 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
+        // ── CAMBIO 1: persistir celulaId al crear usuario ──────────────────
+        if (userDTO.getCelulaId() != null) {
+            user.setCelulaId(userDTO.getCelulaId());
+        }
+        // ───────────────────────────────────────────────────────────────────
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = userDTO
                 .getAuthorities()
@@ -167,9 +166,6 @@ public class UserService {
 
     /**
      * Update all information for a specific user, and return the modified user.
-     *
-     * @param userDTO user to update.
-     * @return updated user.
      */
     public Optional<AdminUserDTO> updateUser(AdminUserDTO userDTO) {
         return Optional.of(userRepository.findById(userDTO.getId()))
@@ -185,6 +181,9 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
+                // ── CAMBIO 2: actualizar celulaId al editar usuario desde admin ──
+                user.setCelulaId(userDTO.getCelulaId());
+                // ─────────────────────────────────────────────────────────────────
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO
@@ -210,15 +209,6 @@ public class UserService {
             });
     }
 
-    /**
-     * Update basic information (first name, last name, email, language) for the current user.
-     *
-     * @param firstName first name of user.
-     * @param lastName  last name of user.
-     * @param email     email id of user.
-     * @param langKey   language key.
-     * @param imageUrl  image URL of user.
-     */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         SecurityUtils.getCurrentUserLogin()
             .flatMap(userRepository::findOneByLogin)
@@ -270,11 +260,30 @@ public class UserService {
         return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
     }
 
+    // ── CAMBIO 3: helper para filtrar por célula en otros ServiceImpl ──────────
     /**
-     * Not activated users should be automatically deleted after 3 days.
-     * <p>
-     * This is scheduled to get fired every day, at 01:00 (am).
+     * Obtiene el celulaId del usuario autenticado DESDE LA BASE DE DATOS.
+     * Nunca usar el JWT para esto.
+     *
+     * Uso en cualquier ServiceImpl:
+     *   Long celulaId = userService.getCelulaIdForCurrentUser();
+     *   return repo.findAllByCelulaId(celulaId, pageable);
      */
+    @Transactional(readOnly = true)
+    public Long getCelulaIdForCurrentUser() {
+        String login = SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new RuntimeException("Usuario no autenticado"));
+
+        User user = userRepository.findOneByLogin(login).orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + login));
+
+        if (user.getCelulaId() == null) {
+            throw new RuntimeException("El usuario '" + login + "' no tiene celula asignada");
+        }
+
+        return user.getCelulaId();
+    }
+
+    // ──────────────────────────────────────────────────────────────────────────
+
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         userRepository
@@ -285,10 +294,6 @@ public class UserService {
             });
     }
 
-    /**
-     * Gets a list of all the authorities.
-     * @return a list of all the authorities.
-     */
     @Transactional(readOnly = true)
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).toList();

@@ -53,6 +53,9 @@ public class AdminUserDTO implements Serializable {
 
     private Set<String> authorities;
 
+    // CAMBIO 1: campo celulaId
+    private Long celulaId;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -71,6 +74,8 @@ public class AdminUserDTO implements Serializable {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        // CAMBIO 2: mapear celulaId desde la entidad
+        this.celulaId = user.getCelulaId();
     }
 
     public Long getId() {
@@ -177,6 +182,15 @@ public class AdminUserDTO implements Serializable {
         this.authorities = authorities;
     }
 
+    // CAMBIO 3: getter y setter celulaId
+    public Long getCelulaId() {
+        return celulaId;
+    }
+
+    public void setCelulaId(Long celulaId) {
+        this.celulaId = celulaId;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
@@ -193,6 +207,7 @@ public class AdminUserDTO implements Serializable {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", celulaId=" + celulaId +
             "}";
     }
 }
