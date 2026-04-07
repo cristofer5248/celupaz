@@ -1,0 +1,27 @@
+{
+  "celupazmasterApp": {
+    "planificacion": {
+      "home": {
+        "title": "Planificacions",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Planificacion",
+        "createOrEditLabel": "Crear o editar Planificacion",
+        "notFound": "Ningún Planificacions encontrado"
+      },
+      "created": "Un nuevo Planificacion ha sido creado con el identificador { param }",
+      "updated": "Un Planificacion ha sido actualizado con el identificador { param }",
+      "deleted": "Un Planificacion ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Planificacion { id }?"
+      },
+      "detail": {
+        "title": "Planificacion"
+      },
+      "id": "ID",
+      "fecha": "Fecha",
+      "almahistory": "Almahistory",
+      "privilege": "Privilege",
+      "planiMaster": "Plani Master"
+    }
+  }
+}

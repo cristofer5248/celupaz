@@ -1,0 +1,24 @@
+{
+  "celupazmasterApp": {
+    "rolCelula": {
+      "home": {
+        "title": "Rol Celulas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Rol Celula",
+        "createOrEditLabel": "Create or edit a Rol Celula",
+        "notFound": "No Rol Celulas found"
+      },
+      "created": "A new Rol Celula is created with identifier { param }",
+      "updated": "A Rol Celula is updated with identifier { param }",
+      "deleted": "A Rol Celula is deleted with identifier { param }",
+      "delete": {
+        "question": "Are you sure you want to delete Rol Celula { id }?"
+      },
+      "detail": {
+        "title": "Rol Celula"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

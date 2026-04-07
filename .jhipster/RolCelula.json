@@ -1,0 +1,17 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032651"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "RolCelula",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

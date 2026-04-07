@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032647"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Attendance",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "memberCelula",
+      "relationshipName": "membercelula",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "fecha",
+      "otherEntityName": "planificacion",
+      "relationshipName": "planificacion",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

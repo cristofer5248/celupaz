@@ -1,0 +1,27 @@
+{
+  "celupazmasterApp": {
+    "memberCelula": {
+      "home": {
+        "title": "Member Celulas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Member Celula",
+        "createOrEditLabel": "Crear o editar Member Celula",
+        "notFound": "Ningún Member Celulas encontrado"
+      },
+      "created": "Un nuevo Member Celula ha sido creado con el identificador { param }",
+      "updated": "Un Member Celula ha sido actualizado con el identificador { param }",
+      "deleted": "Un Member Celula ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Member Celula { id }?"
+      },
+      "detail": {
+        "title": "Member Celula"
+      },
+      "id": "ID",
+      "fechaCreada": "Fecha Creada",
+      "enabled": "Enabled",
+      "member": "Member",
+      "cell": "Cell"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AlmaHistory.
+    -->
+    <changeSet id="20260328032646-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="alma_id"
+                                 baseTableName="alma_history"
+                                 constraintName="fk_alma_history__alma_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="alma"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cell_id"
+                                 baseTableName="alma_history"
+                                 constraintName="fk_alma_history__cell_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cell"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="rolcelula_id"
+                                 baseTableName="alma_history"
+                                 constraintName="fk_alma_history__rolcelula_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rol_celula"
+                                 />
+    </changeSet>
+</databaseChangeLog>

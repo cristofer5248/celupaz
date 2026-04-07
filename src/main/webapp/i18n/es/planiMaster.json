@@ -1,0 +1,32 @@
+{
+  "celupazmasterApp": {
+    "planiMaster": {
+      "home": {
+        "title": "Plani Masters",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Plani Master",
+        "createOrEditLabel": "Crear o editar Plani Master",
+        "notFound": "Ningún Plani Masters encontrado"
+      },
+      "created": "Un nuevo Plani Master ha sido creado con el identificador { param }",
+      "updated": "Un Plani Master ha sido actualizado con el identificador { param }",
+      "deleted": "Un Plani Master ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Plani Master { id }?"
+      },
+      "detail": {
+        "title": "Plani Master"
+      },
+      "id": "ID",
+      "fecha": "Fecha",
+      "ofrenda": "Ofrenda",
+      "visitaCordinador": "Visita Cordinador",
+      "visitaTutor": "Visita Tutor",
+      "visitaDirector": "Visita Director",
+      "otraVisita": "Otra Visita",
+      "note": "Note",
+      "doneby": "Doneby",
+      "completado": "Completado"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032642"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sector",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lider",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cordinador",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Cell",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "cellType",
+      "relationshipName": "cellType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

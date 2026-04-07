@@ -1,0 +1,24 @@
+{
+  "celupazmasterApp": {
+    "iglesia": {
+      "home": {
+        "title": "Iglesias",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Iglesia",
+        "createOrEditLabel": "Crear o editar Iglesia",
+        "notFound": "Ningún Iglesias encontrado"
+      },
+      "created": "Un nuevo Iglesia ha sido creado con el identificador { param }",
+      "updated": "Un Iglesia ha sido actualizado con el identificador { param }",
+      "deleted": "Un Iglesia ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Iglesia { id }?"
+      },
+      "detail": {
+        "title": "Iglesia"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

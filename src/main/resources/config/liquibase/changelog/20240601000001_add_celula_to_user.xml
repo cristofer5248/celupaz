@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+  <changeSet id="20240601000001" author="tu-nombre">
+
+    <!-- 1. Agregar la columna celula_id (nullable porque admins pueden no tener célula) -->
+    <addColumn tableName="jhi_user">
+      <column name="celula_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+    </addColumn>
+
+    <!-- 2. FK hacia la tabla cell -->
+    <addForeignKeyConstraint
+      baseTableName="jhi_user"
+      baseColumnNames="celula_id"
+      referencedTableName="cell"
+      referencedColumnNames="id"
+      constraintName="fk_jhi_user_celula_id"
+      onDelete="SET NULL"
+      onUpdate="NO ACTION"/>
+
+  </changeSet>
+
+</databaseChangeLog>

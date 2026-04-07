@@ -1,0 +1,30 @@
+{
+  "celupazmasterApp": {
+    "cell": {
+      "home": {
+        "title": "Cells",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Cell",
+        "createOrEditLabel": "Crear o editar Cell",
+        "notFound": "Ningún Cells encontrado"
+      },
+      "created": "Un nuevo Cell ha sido creado con el identificador { param }",
+      "updated": "Un Cell ha sido actualizado con el identificador { param }",
+      "deleted": "Un Cell ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cell { id }?"
+      },
+      "detail": {
+        "title": "Cell"
+      },
+      "id": "ID",
+      "name": "Name",
+      "startDate": "Start Date",
+      "description": "Description",
+      "sector": "Sector",
+      "lider": "Lider",
+      "cordinador": "Cordinador",
+      "cellType": "Cell Type"
+    }
+  }
+}

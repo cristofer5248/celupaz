@@ -1,0 +1,34 @@
+{
+  "celupazmasterApp": {
+    "member": {
+      "home": {
+        "title": "Members",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Member",
+        "createOrEditLabel": "Crear o editar Member",
+        "notFound": "Ningún Members encontrado"
+      },
+      "created": "Un nuevo Member ha sido creado con el identificador { param }",
+      "updated": "Un Member ha sido actualizado con el identificador { param }",
+      "deleted": "Un Member ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Member { id }?"
+      },
+      "detail": {
+        "title": "Member"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "department": "Department",
+      "municipality": "Municipality",
+      "colony": "Colony",
+      "isCompaz": "Is Compaz",
+      "fechacumple": "Fechacumple",
+      "padre": "Padre",
+      "relacion": "Relacion",
+      "iglesia": "Iglesia"
+    }
+  }
+}

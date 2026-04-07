@@ -1,0 +1,27 @@
+{
+  "celupazmasterApp": {
+    "almaHistory": {
+      "home": {
+        "title": "Alma Histories",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Alma History",
+        "createOrEditLabel": "Crear o editar Alma History",
+        "notFound": "Ningún Alma Histories encontrado"
+      },
+      "created": "Un nuevo Alma History ha sido creado con el identificador { param }",
+      "updated": "Un Alma History ha sido actualizado con el identificador { param }",
+      "deleted": "Un Alma History ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Alma History { id }?"
+      },
+      "detail": {
+        "title": "Alma History"
+      },
+      "id": "ID",
+      "fecha": "Fecha",
+      "alma": "Alma",
+      "cell": "Cell",
+      "rolcelula": "Rolcelula"
+    }
+  }
+}

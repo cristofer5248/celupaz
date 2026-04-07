@@ -1,0 +1,17 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032644"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Iglesia",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

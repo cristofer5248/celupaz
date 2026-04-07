@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032649"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "fechaCreada",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "MemberCelula",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "member",
+      "relationshipName": "member",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "cell",
+      "relationshipName": "cell",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

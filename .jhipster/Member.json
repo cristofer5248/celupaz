@@ -1,0 +1,62 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032643"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "department",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "municipality",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "colony",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isCompaz",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "fechacumple",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "padre",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "relacion",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Member",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "iglesia",
+      "relationshipName": "iglesia",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

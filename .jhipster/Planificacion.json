@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032648"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Planificacion",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "almaHistory",
+      "relationshipName": "almahistory",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "privilege",
+      "relationshipName": "privilege",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "fecha",
+      "otherEntityName": "planiMaster",
+      "relationshipName": "planiMaster",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

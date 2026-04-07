@@ -1,0 +1,31 @@
+{
+  "celupazmasterApp": {
+    "alma": {
+      "home": {
+        "title": "Almas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Alma",
+        "createOrEditLabel": "Crear o editar Alma",
+        "notFound": "Ningún Almas encontrado"
+      },
+      "created": "Un nuevo Alma ha sido creado con el identificador { param }",
+      "updated": "Un Alma ha sido actualizado con el identificador { param }",
+      "deleted": "Un Alma ha sido eliminado con el identificador { param }",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Alma { id }?"
+      },
+      "detail": {
+        "title": "Alma"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "department": "Department",
+      "municipality": "Municipality",
+      "colony": "Colony",
+      "description": "Description",
+      "foto": "Foto"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "celupazmasterApp": {
+    "privilege": {
+      "home": {
+        "title": "Privileges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Privilege",
+        "createOrEditLabel": "Create or edit a Privilege",
+        "notFound": "No Privileges found"
+      },
+      "created": "A new Privilege is created with identifier { param }",
+      "updated": "A Privilege is updated with identifier { param }",
+      "deleted": "A Privilege is deleted with identifier { param }",
+      "delete": {
+        "question": "Are you sure you want to delete Privilege { id }?"
+      },
+      "detail": {
+        "title": "Privilege"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

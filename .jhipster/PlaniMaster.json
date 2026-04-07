@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032650"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ofrenda",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "visitaCordinador",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "visitaTutor",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "visitaDirector",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "otraVisita",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "doneby",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "completado",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "PlaniMaster",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

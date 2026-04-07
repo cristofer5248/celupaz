@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20260328032646"
+  },
+  "applications": ["*"],
+  "fields": [
+    {
+      "fieldName": "fecha",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AlmaHistory",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "alma",
+      "relationshipName": "alma",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "cell",
+      "relationshipName": "cell",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "rolCelula",
+      "relationshipName": "rolcelula",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
