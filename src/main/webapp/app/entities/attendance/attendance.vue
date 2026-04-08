@@ -36,13 +36,14 @@
               <span>{{ t$('celupazmasterApp.attendance.fecha') }}</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'fecha'"></jhi-sort-indicator>
             </th>
-            <th scope="col" @click="changeOrder('membercelula.id')">
-              <span>{{ t$('celupazmasterApp.attendance.membercelula') }}</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'membercelula.id'"></jhi-sort-indicator>
+            <th scope="col">
+              <span>Miembro</span>
             </th>
-            <th scope="col" @click="changeOrder('planificacion.fecha')">
-              <span>{{ t$('celupazmasterApp.attendance.planificacion') }}</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'planificacion.fecha'"></jhi-sort-indicator>
+            <th scope="col">
+              <span>Célula</span>
+            </th>
+            <th scope="col">
+              <span>Estado</span>
             </th>
             <th scope="col"></th>
           </tr>
@@ -50,23 +51,22 @@
         <tbody>
           <tr v-for="attendance in attendances" :key="attendance.id" data-cy="entityTable">
             <td>
-              <router-link :to="{ name: 'AttendanceView', params: { attendanceId: attendance.id } }">{{ attendance.id }}</router-link>
+              <router-link :to="{ name: 'AttendanceView', params: { attendanceId: attendance.id } }">
+                {{ attendance.id }}
+              </router-link>
             </td>
             <td>{{ attendance.fecha }}</td>
+
+            <td>{{ attendance.memberName }}</td>
+
+            <td>{{ attendance.cellName }}</td>
+
             <td>
-              <div v-if="attendance.membercelula">
-                <router-link :to="{ name: 'MemberCelulaView', params: { memberCelulaId: attendance.membercelula.id } }">{{
-                  attendance.membercelula.id
-                }}</router-link>
-              </div>
+              <span :class="['badge', attendance.enabled ? 'bg-success' : 'bg-danger']">
+                {{ attendance.enabled ? 'Activo' : 'Inactivo' }}
+              </span>
             </td>
-            <td>
-              <div v-if="attendance.planificacion">
-                <router-link :to="{ name: 'PlanificacionView', params: { planificacionId: attendance.planificacion.id } }">{{
-                  attendance.planificacion.fecha
-                }}</router-link>
-              </div>
-            </td>
+
             <td class="text-end">
               <div class="btn-group">
                 <router-link :to="{ name: 'AttendanceView', params: { attendanceId: attendance.id } }" custom v-slot="{ navigate }">
@@ -97,11 +97,12 @@
         </tbody>
       </table>
     </div>
+
     <b-modal ref="removeEntity" id="removeEntity">
       <template #title>
-        <span id="celupazmasterApp.attendance.delete.question" data-cy="attendanceDeleteDialogHeading">{{
-          t$('entity.delete.title')
-        }}</span>
+        <span id="celupazmasterApp.attendance.delete.question" data-cy="attendanceDeleteDialogHeading">
+          {{ t$('entity.delete.title') }}
+        </span>
       </template>
       <div class="modal-body">
         <p id="jhi-delete-attendance-heading">{{ t$('celupazmasterApp.attendance.delete.question', { id: removeId }) }}</p>
@@ -121,6 +122,7 @@
         </div>
       </template>
     </b-modal>
+
     <div v-show="attendances?.length > 0">
       <div class="d-flex justify-content-center">
         <jhi-item-count :page="page" :total="queryCount" :items-per-page="itemsPerPage"></jhi-item-count>

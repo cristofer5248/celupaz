@@ -32,8 +32,18 @@ public interface MemberCelulaRepository extends JpaRepository<MemberCelula, Long
     )
     Page<MemberCelula> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select memberCelula from MemberCelula memberCelula left join fetch memberCelula.member left join fetch memberCelula.cell")
+    @Query(
+        "select memberCelula from MemberCelula memberCelula " + "left join fetch memberCelula.member " + "left join fetch memberCelula.cell"
+    )
     List<MemberCelula> findAllWithToOneRelationships();
+
+    @Query(
+        "select memberCelula from MemberCelula memberCelula " +
+            "left join fetch memberCelula.member " +
+            "left join fetch memberCelula.cell c " +
+            "where c.lider = :login"
+    ) // Filtramos por el campo 'lider' de la tabla Cell
+    List<MemberCelula> findAllByLider(@Param("login") String login);
 
     @Query(
         "select memberCelula from MemberCelula memberCelula left join fetch memberCelula.member left join fetch memberCelula.cell where memberCelula.id =:id"

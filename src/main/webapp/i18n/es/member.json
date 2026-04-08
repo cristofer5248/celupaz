@@ -2,33 +2,33 @@
   "celupazmasterApp": {
     "member": {
       "home": {
-        "title": "Members",
+        "title": "Miembro",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Member",
-        "createOrEditLabel": "Crear o editar Member",
-        "notFound": "Ningún Members encontrado"
+        "createLabel": "Crear nuevo Miembro",
+        "createOrEditLabel": "Crear o editar Miembro",
+        "notFound": "Ningún Miembro encontrado"
       },
-      "created": "Un nuevo Member ha sido creado con el identificador { param }",
-      "updated": "Un Member ha sido actualizado con el identificador { param }",
-      "deleted": "Un Member ha sido eliminado con el identificador { param }",
+      "created": "Un nuevo Miembro ha sido creado con el identificador { param }",
+      "updated": "Un Miembro ha sido actualizado con el identificador { param }",
+      "deleted": "Un Miembro ha sido eliminado con el identificador { param }",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Member { id }?"
+        "question": "¿Seguro que quiere eliminar este miembro { id }?"
       },
       "detail": {
-        "title": "Member"
+        "title": "Miembro"
       },
       "id": "ID",
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "department": "Department",
-      "municipality": "Municipality",
-      "colony": "Colony",
-      "isCompaz": "Is Compaz",
-      "fechacumple": "Fechacumple",
-      "padre": "Padre",
+      "name": "Nombre",
+      "email": "Correo",
+      "phone": "Telefono",
+      "department": "Departamento",
+      "municipality": "Minicipio",
+      "colony": "Colonia",
+      "isCompaz": "Bautizado",
+      "fechacumple": "Fecha de Nacimiento",
+      "padre": "Hijos",
       "relacion": "Relacion",
-      "iglesia": "Iglesia"
+      "iglesia": "Congregacion"
     }
   }
 }

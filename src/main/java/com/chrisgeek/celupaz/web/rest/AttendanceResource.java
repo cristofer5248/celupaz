@@ -1,6 +1,7 @@
 package com.chrisgeek.celupaz.web.rest;
 
 import com.chrisgeek.celupaz.domain.Attendance;
+import com.chrisgeek.celupaz.domain.AttendanceDTO;
 import com.chrisgeek.celupaz.repository.AttendanceRepository;
 import com.chrisgeek.celupaz.service.AttendanceService;
 import com.chrisgeek.celupaz.web.rest.errors.BadRequestAlertException;
@@ -143,16 +144,19 @@ public class AttendanceResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of Attendances in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Attendance>> getAllAttendances(
+    //    public ResponseEntity<List<Attendance>> getAllAttendances(
+    public ResponseEntity<List<AttendanceDTO>> getAllAttendances(
         @org.springdoc.core.annotations.ParameterObject Pageable pageable,
         @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
     ) {
         LOG.debug("REST request to get a page of Attendances");
-        Page<Attendance> page;
+        Page<AttendanceDTO> page;
         if (eagerload) {
-            page = attendanceService.findAllWithEagerRelationships(pageable);
+            //            page = attendanceService.findAllWithEagerRelationships(pageable);
+            page = attendanceService.findAllAttendances(pageable);
         } else {
-            page = attendanceService.findAll(pageable);
+            //            page = attendanceService.findAll(pageable);
+            page = attendanceService.findAllAttendances(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

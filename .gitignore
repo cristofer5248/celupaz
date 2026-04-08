@@ -31,6 +31,9 @@ local.properties
 .loadpath
 .factorypath
 
+# tests
+/src/test/
+
 # External tool builders
 .externalToolBuilders/**
 

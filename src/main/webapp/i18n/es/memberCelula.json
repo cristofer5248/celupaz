@@ -2,20 +2,20 @@
   "celupazmasterApp": {
     "memberCelula": {
       "home": {
-        "title": "Member Celulas",
+        "title": "Miembros de celula",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Member Celula",
+        "createLabel": "Asignar Miembro de Celula",
         "createOrEditLabel": "Crear o editar Member Celula",
         "notFound": "Ningún Member Celulas encontrado"
       },
-      "created": "Un nuevo Member Celula ha sido creado con el identificador { param }",
-      "updated": "Un Member Celula ha sido actualizado con el identificador { param }",
-      "deleted": "Un Member Celula ha sido eliminado con el identificador { param }",
+      "created": "Se ha asignado un Miembro a una celula con el identificador { param }",
+      "updated": "Se ha editado la asignacion de un Miembro de Celula { param }",
+      "deleted": "Se ha desasignado un miembro de celula { param }",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Member Celula { id }?"
+        "question": "¿Seguro que quiere desasignar el miembro de la Celula { id }?"
       },
       "detail": {
-        "title": "Member Celula"
+        "title": "Miembro de celula"
       },
       "id": "ID",
       "fechaCreada": "Fecha Creada",

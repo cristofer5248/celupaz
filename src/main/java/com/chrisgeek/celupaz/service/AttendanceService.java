@@ -1,7 +1,9 @@
 package com.chrisgeek.celupaz.service;
 
 import com.chrisgeek.celupaz.domain.Attendance;
+import com.chrisgeek.celupaz.domain.AttendanceDTO;
 import com.chrisgeek.celupaz.repository.AttendanceRepository;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
@@ -114,5 +116,16 @@ public class AttendanceService {
         if (value != null) {
             setter.accept(value);
         }
+    }
+
+    public Page<AttendanceDTO> findAllAttendances(Pageable pageable) {
+        // 1. Si es ADMIN, ve absolutamente todo
+        if (com.chrisgeek.celupaz.security.SecurityUtils.hasCurrentUserThisAuthority("ROLE_ADMIN")) {
+            return attendanceRepository.findAllDTO(pageable);
+        }
+
+        // 2. Si no es admin, filtramos por su login de líder
+        String login = com.chrisgeek.celupaz.security.SecurityUtils.getCurrentUserLogin().orElse("");
+        return attendanceRepository.findAllByLiderDTO(login, pageable);
     }
 }

@@ -2,6 +2,8 @@ package com.chrisgeek.celupaz.service;
 
 import com.chrisgeek.celupaz.domain.MemberCelula;
 import com.chrisgeek.celupaz.repository.MemberCelulaRepository;
+import com.chrisgeek.celupaz.security.SecurityUtils;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -74,10 +76,16 @@ public class MemberCelulaService {
      *
      * @return the list of entities.
      */
-    @Transactional(readOnly = true)
+    //    @Transactional(readOnly = true)
+    //    public List<MemberCelula> findAll() {
+    //        LOG.debug("Request to get all MemberCelulas");
+    //        return memberCelulaRepository.findAllWithToOneRelationships();
+    //    }
     public List<MemberCelula> findAll() {
-        LOG.debug("Request to get all MemberCelulas");
-        return memberCelulaRepository.findAll();
+        if (SecurityUtils.hasCurrentUserThisAuthority("ROLE_ADMIN")) {
+            return memberCelulaRepository.findAllWithToOneRelationships(); // Ve todo
+        }
+        return SecurityUtils.getCurrentUserLogin().map(memberCelulaRepository::findAllByLider).orElse(new ArrayList<>());
     }
 
     /**
