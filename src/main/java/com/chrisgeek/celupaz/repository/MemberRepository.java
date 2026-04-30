@@ -37,4 +37,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query("select member from Member member left join fetch member.iglesia where member.id =:id")
     Optional<Member> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        value = "select member from Member member left join fetch member.iglesia where member.createdBy = :login",
+        countQuery = "select count(member) from Member member where member.createdBy = :login"
+    )
+    Page<Member> findAllByCreatedBy(Pageable pageable, @Param("login") String login);
 }

@@ -32,6 +32,7 @@
     <include file="config/liquibase/changelog/20260328032648_added_entity_constraints_Planificacion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20260328032649_added_entity_constraints_MemberCelula.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240601000001_add_celula_to_user.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20260420172609__added_entity_field_Member_createdBy.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

@@ -36,7 +36,7 @@
       <font-awesome-icon icon="asterisk" />
       <span>{{ t$('global.menu.entities.planificacion') }}</span>
     </b-dropdown-item>
-    <b-dropdown-item to="/member-celula" v-if="hasAnyAuthority(['ROLE_ADMIN', 'ROLE_L2'])">
+    <b-dropdown-item to="/member-celula">
       <font-awesome-icon icon="asterisk" />
       <span>{{ t$('global.menu.entities.memberCelula') }}</span>
     </b-dropdown-item>

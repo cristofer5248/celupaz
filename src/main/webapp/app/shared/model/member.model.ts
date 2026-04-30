@@ -13,6 +13,7 @@ export interface IMember {
   padre?: boolean | null;
   relacion?: string | null;
   iglesia?: IIglesia | null;
+  createdBy?: string | null;
 }
 
 export class Member implements IMember {
@@ -29,6 +30,7 @@ export class Member implements IMember {
     public padre?: boolean | null,
     public relacion?: string | null,
     public iglesia?: IIglesia | null,
+    public createdBy?: createdBy | null,
   ) {
     this.isCompaz = this.isCompaz ?? false;
     this.padre = this.padre ?? false;

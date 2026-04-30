@@ -2,9 +2,9 @@
   "celupazmasterApp": {
     "planificacion": {
       "home": {
-        "title": "Planificacions",
+        "title": "Planificaciones",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Planificacion",
+        "createLabel": "Crear nueva Planificacion",
         "createOrEditLabel": "Crear o editar Planificacion",
         "notFound": "Ningún Planificacions encontrado"
       },
@@ -18,10 +18,10 @@
         "title": "Planificacion"
       },
       "id": "ID",
-      "fecha": "Fecha",
-      "almahistory": "Almahistory",
-      "privilege": "Privilege",
-      "planiMaster": "Plani Master"
+      "fecha": "Fecha creado",
+      "almahistory": "Tu equipo de trabajo",
+      "privilege": "Privilegio",
+      "planiMaster": "DIA DE CELULA"
     }
   }
 }

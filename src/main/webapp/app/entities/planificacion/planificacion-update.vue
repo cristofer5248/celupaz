@@ -12,32 +12,37 @@
           </div>
           <div class="mb-3">
             <label class="form-control-label" for="planificacion">{{ t$('celupazmasterApp.planificacion.fecha') }}</label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="planificacion-fecha"
-                  v-model="v$.fecha.$model"
-                  name="fecha"
+            <template>
+              <b-input-group class="mb-3">
+                <b-input-group-prepend>
+                  <b-form-datepicker
+                    aria-controls="planificacion-fecha"
+                    v-model="v$.fecha.$model"
+                    name="fecha"
+                    class="form-control"
+                    :locale="currentLanguage"
+                    button-only
+                    today-button
+                    reset-button
+                    close-button
+                  >
+                  </b-form-datepicker>
+                </b-input-group-prepend>
+                <b-form-input
+                  id="planificacion-fecha"
+                  data-cy="fecha"
+                  type="date"
                   class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="planificacion-fecha"
-                data-cy="fecha"
-                type="text"
-                class="form-control"
-                name="fecha"
-                :class="{ valid: !v$.fecha.$invalid, invalid: v$.fecha.$invalid }"
-                v-model="v$.fecha.$model"
-                required
-              />
-            </b-input-group>
+                  name="fecha"
+                  :class="{ valid: !v$.fecha.$invalid, invalid: v$.fecha.$invalid }"
+                  v-model="v$.fecha.$model"
+                  required
+                />
+              </b-input-group>
+            </template>
+            <span id="planificacion-fecha" class="form-control-plaintext font-weight-bold">
+              {{ v$.fecha.$model }}
+            </span>
             <div v-if="v$.fecha.$anyDirty && v$.fecha.$invalid">
               <small class="form-text text-danger" v-for="error of v$.fecha.$errors" :key="error.$uid">{{ error.$message }}</small>
             </div>
@@ -61,7 +66,7 @@
                 v-for="almaHistoryOption in almaHistories"
                 :key="almaHistoryOption.id"
               >
-                {{ almaHistoryOption.id }}
+                {{ almaHistoryOption.alma.name }}
               </option>
             </select>
           </div>

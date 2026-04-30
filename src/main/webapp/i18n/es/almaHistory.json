@@ -2,20 +2,20 @@
   "celupazmasterApp": {
     "almaHistory": {
       "home": {
-        "title": "Alma Histories",
+        "title": "Historico de Equipos de trabajos",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Alma History",
-        "createOrEditLabel": "Crear o editar Alma History",
-        "notFound": "Ningún Alma Histories encontrado"
+        "createLabel": "Agregar a equipo de trabajo",
+        "createOrEditLabel": "Crear o editar Equipo de trabajo",
+        "notFound": "Ningún equipo de trabajo encontrado"
       },
-      "created": "Un nuevo Alma History ha sido creado con el identificador { param }",
-      "updated": "Un Alma History ha sido actualizado con el identificador { param }",
-      "deleted": "Un Alma History ha sido eliminado con el identificador { param }",
+      "created": "Un integrante de equipo de trabajo ha sido creado con el identificador { param }",
+      "updated": "Un integrante de equipo de trabajo ha sido actualizado con el identificador { param }",
+      "deleted": "Un integrante de equipo de trabajo ha sido eliminado con el identificador { param }",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Alma History { id }?"
+        "question": "¿Seguro que quiere eliminar del equipo de trabajo el integrante con el identificador { id }?"
       },
       "detail": {
-        "title": "Alma History"
+        "title": "Equipos de trabajo - Historico"
       },
       "id": "ID",
       "fecha": "Fecha",

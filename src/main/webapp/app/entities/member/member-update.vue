@@ -151,6 +151,10 @@
             />
           </div>
           <div class="mb-3">
+            <label class="form-control-label" for="member-createdBy">Created By</label>
+            <span class="form-control-static" style="display: block; padding: 5px">{{ member.createdBy }}</span>
+          </div>
+          <div class="mb-3">
             <label class="form-control-label" for="member">{{ t$('celupazmasterApp.member.iglesia') }}</label>
             <select class="form-control" id="member-iglesia" data-cy="iglesia" name="iglesia" v-model="member.iglesia">
               <option :value="null"></option>

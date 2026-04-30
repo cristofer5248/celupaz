@@ -148,8 +148,10 @@ public class AlmaHistoryResource {
         LOG.debug("REST request to get a page of AlmaHistories");
         Page<AlmaHistory> page;
         if (eagerload) {
+            // page = almaHistoryService.findAll(pageable);
             page = almaHistoryService.findAllWithEagerRelationships(pageable);
         } else {
+            LOG.debug("entrando al else de getAllAlmaHistories");
             page = almaHistoryService.findAll(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

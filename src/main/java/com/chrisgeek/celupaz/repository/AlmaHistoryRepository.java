@@ -41,4 +41,10 @@ public interface AlmaHistoryRepository extends JpaRepository<AlmaHistory, Long> 
         "select almaHistory from AlmaHistory almaHistory left join fetch almaHistory.alma left join fetch almaHistory.cell left join fetch almaHistory.rolcelula where almaHistory.id =:id"
     )
     Optional<AlmaHistory> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        value = "select almaHistory from AlmaHistory almaHistory left join fetch almaHistory.alma left join fetch almaHistory.cell left join fetch almaHistory.rolcelula where almaHistory.cell.lider = :login ",
+        countQuery = "select count(almaHistory) from AlmaHistory almaHistory"
+    )
+    Page<AlmaHistory> findAllByUser(Pageable pageable, @Param("login") String login);
 }

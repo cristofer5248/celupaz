@@ -2,6 +2,8 @@ package com.chrisgeek.celupaz.service;
 
 import com.chrisgeek.celupaz.domain.AlmaHistory;
 import com.chrisgeek.celupaz.repository.AlmaHistoryRepository;
+import com.chrisgeek.celupaz.security.AuthoritiesConstants;
+import com.chrisgeek.celupaz.security.SecurityUtils;
 import java.util.Optional;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
@@ -76,7 +78,13 @@ public class AlmaHistoryService {
     @Transactional(readOnly = true)
     public Page<AlmaHistory> findAll(Pageable pageable) {
         LOG.debug("Request to get all AlmaHistories");
-        return almaHistoryRepository.findAll(pageable);
+        if (SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)) {
+            return almaHistoryRepository.findAll(pageable);
+        } else {
+            return SecurityUtils.getCurrentUserLogin()
+                .map(login -> almaHistoryRepository.findAllByUser(pageable, login))
+                .orElse(Page.empty(pageable));
+        }
     }
 
     /**
@@ -85,7 +93,13 @@ public class AlmaHistoryService {
      * @return the list of entities.
      */
     public Page<AlmaHistory> findAllWithEagerRelationships(Pageable pageable) {
-        return almaHistoryRepository.findAllWithEagerRelationships(pageable);
+        if (SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)) {
+            return almaHistoryRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            return SecurityUtils.getCurrentUserLogin()
+                .map(login -> almaHistoryRepository.findAllByUser(pageable, login))
+                .orElse(Page.empty(pageable));
+        }
     }
 
     /**

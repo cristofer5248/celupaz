@@ -2,6 +2,7 @@ package com.chrisgeek.celupaz.web.rest;
 
 import com.chrisgeek.celupaz.domain.Member;
 import com.chrisgeek.celupaz.repository.MemberRepository;
+import com.chrisgeek.celupaz.security.SecurityUtils;
 import com.chrisgeek.celupaz.service.MemberService;
 import com.chrisgeek.celupaz.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
@@ -60,7 +61,9 @@ public class MemberResource {
         if (member.getId() != null) {
             throw new BadRequestAlertException("A new member cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         member = memberService.save(member);
+        member.setCreatedBy(SecurityUtils.getCurrentUserLogin().orElse("system"));
         return ResponseEntity.created(new URI("/api/members/" + member.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, member.getId().toString()))
             .body(member);

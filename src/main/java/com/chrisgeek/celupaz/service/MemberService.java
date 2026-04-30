@@ -2,6 +2,8 @@ package com.chrisgeek.celupaz.service;
 
 import com.chrisgeek.celupaz.domain.Member;
 import com.chrisgeek.celupaz.repository.MemberRepository;
+import com.chrisgeek.celupaz.security.AuthoritiesConstants;
+import com.chrisgeek.celupaz.security.SecurityUtils;
 import java.util.Optional;
 import java.util.function.Consumer;
 import org.slf4j.Logger;
@@ -94,7 +96,15 @@ public class MemberService {
      * @return the list of entities.
      */
     public Page<Member> findAllWithEagerRelationships(Pageable pageable) {
-        return memberRepository.findAllWithEagerRelationships(pageable);
+        // 1. Si es Admin, sigue viendo todo con Eager Load
+        if (SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)) {
+            return memberRepository.findAllWithEagerRelationships(pageable);
+        }
+
+        // 2. Si es Líder, usamos tu nueva consulta filtrada (que ya tiene el fetch join)
+        return SecurityUtils.getCurrentUserLogin()
+            .map(login -> memberRepository.findAllByCreatedBy(pageable, login))
+            .orElse(Page.empty(pageable));
     }
 
     /**

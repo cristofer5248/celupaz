@@ -70,6 +70,7 @@ export default defineComponent({
       padre: {},
       relacion: {},
       iglesia: {},
+      createdBy: {},
     };
     const v$ = useVuelidate(validationRules, member as any);
     v$.value.$validate();

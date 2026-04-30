@@ -57,6 +57,18 @@ public class Member implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Iglesia iglesia;
 
+    @Size(max = 20)
+    @Column(name = "created_by", length = 20)
+    private String createdBy;
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {

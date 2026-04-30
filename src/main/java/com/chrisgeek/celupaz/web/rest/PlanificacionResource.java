@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -60,6 +61,7 @@ public class PlanificacionResource {
         if (planificacion.getId() != null) {
             throw new BadRequestAlertException("A new planificacion cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        planificacion.setFecha(LocalDate.now());
         planificacion = planificacionService.save(planificacion);
         return ResponseEntity.created(new URI("/api/planificacions/" + planificacion.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planificacion.getId().toString()))
