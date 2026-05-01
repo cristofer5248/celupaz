@@ -1,30 +1,31 @@
-# ETAPA 1: Construcción usando Debian para compatibilidad
-FROM maven:3.8.5-openjdk-17-slim AS build
+# STAGE 1: Build using Maven and JDK 21
+FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
 WORKDIR /app
 
-# Instalar Node.js y herramientas necesarias en Debian
+# Install Node.js (Required for JHipster frontend assets)
 RUN apt-get update && \
     apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean
 
-# Copiar el código
+# Copy the source code
 COPY . .
 
-# Dar permisos al wrapper si es necesario
+# Ensure the wrapper has execution permissions
 RUN chmod +x mvnw
 
-# Construir el JAR (sin perfil prod para mantener modo dev)
+# Build the JAR (using skipTests to speed up deployment)
 RUN ./mvnw clean package -DskipTests
 
-# ETAPA 2: Ejecución
-FROM eclipse-temurin:17-jre-focal
+# STAGE 2: Execution using JRE 21
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
+# Copy the built jar from the previous stage
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-# Forzamos el perfil dev y nos aseguramos de que escuche en todas las interfaces
+# Run with dev profile and bind to 0.0.0.0 for Fly.io reachability
 ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=dev", "--server.address=0.0.0.0"]
