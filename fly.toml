@@ -10,6 +10,7 @@ primary_region = 'dfw'
 
 [env]
   SPRING_PROFILES_ACTIVE = 'dev'
+  SPRING_DATASOURCE_DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"
 
 [http_service]
   internal_port = 8080
