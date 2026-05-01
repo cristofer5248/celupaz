@@ -89,37 +89,27 @@
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title mb-0">Asistentes</h5>
-                <button type="button" class="btn btn-success btn-sm" @click="addItem()">
-                  <font-awesome-icon icon="plus"></font-awesome-icon>&nbsp;<span>Agregar</span>
-                </button>
               </div>
 
-              <div v-for="(item, index) in items" :key="index" class="row align-items-end mb-3 pb-3 border-bottom">
-                <div class="col-md-10">
-                  <label class="form-control-label">{{ t$('celupazmasterApp.attendance.membercelula') }}</label>
-                  <select class="form-control" v-model="item.membercelula" required>
-                    <option :value="null">Seleccione un miembro...</option>
-                    <option
+              <!-- Checkbox List -->
+              <div class="row">
+                <div v-for="memberCelulaOption in memberCelulas" :key="memberCelulaOption.id" class="col-md-6 mb-2">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      :id="'member-' + memberCelulaOption.id"
                       :value="memberCelulaOption"
-                      v-for="memberCelulaOption in getAvailableMemberCelulas(index)"
-                      :key="memberCelulaOption.id"
-                    >
+                      v-model="selectedMemberCelulas"
+                    />
+                    <label class="form-check-label" :for="'member-' + memberCelulaOption.id">
                       {{ memberCelulaOption.member.name }}
-                    </option>
-                    <!-- Also include currently selected one to show it -->
-                    <option
-                      v-if="item.membercelula && !getAvailableMemberCelulas(index).find(mc => mc.id === item.membercelula.id)"
-                      :value="item.membercelula"
-                    >
-                      {{ item.membercelula.member.name }}
-                    </option>
-                  </select>
+                    </label>
+                  </div>
                 </div>
-                <div class="col-md-2">
-                  <button type="button" class="btn btn-danger w-100" @click="removeItem(index)" :disabled="items.length === 1">
-                    <font-awesome-icon icon="trash"></font-awesome-icon>&nbsp;<span>Quitar</span>
-                  </button>
-                </div>
+              </div>
+              <div v-if="selectedMemberCelulas.length === 0" class="text-danger mt-2">
+                <small>Debe seleccionar al menos un asistente.</small>
               </div>
             </div>
           </div>

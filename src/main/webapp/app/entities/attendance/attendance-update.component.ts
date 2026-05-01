@@ -33,7 +33,7 @@ export default defineComponent({
     // Multi-creation state
     const sharedPlanificacion = ref<IPlanificacion | null>(null);
     const sharedFecha = ref<string>(getTodayDateString());
-    const items = ref<{ membercelula: IMemberCelula | null }[]>([{ membercelula: null }]);
+    const selectedMemberCelulas: Ref<IMemberCelula[]> = ref([]); // Use an array for checkbox v-model
 
     const memberCelulaService = inject('memberCelulaService', () => new MemberCelulaService());
     const memberCelulas: Ref<IMemberCelula[]> = ref([]);
@@ -87,34 +87,15 @@ export default defineComponent({
     const v$ = useVuelidate(validationRules, attendance as any);
     v$.value.$validate();
 
-    const addItem = () => {
-      items.value.push({ membercelula: null });
-    };
-
-    const removeItem = (index: number) => {
-      if (items.value.length > 1) {
-        items.value.splice(index, 1);
-      }
-    };
-
-    const getAvailableMemberCelulas = (currentIndex: number) => {
-      const selectedIds = items.value
-        .map((item, index) => (index !== currentIndex && item.membercelula ? item.membercelula.id : null))
-        .filter(id => id !== null);
-      return memberCelulas.value.filter(mc => mc.id && !selectedIds.includes(mc.id));
-    };
-
     const isFormValid = computed(() => {
       if (isEdit.value) {
-        return !v$.value.$invalid;
+        // Validation for edit mode remains the same
+        return attendance.value.membercelula != null && attendance.value.planificacion != null;
       } else {
+        // Validation for create mode: planificacion must be selected and at least one member must be checked.
         const isSharedValid = sharedPlanificacion.value !== null;
-        const areItemsValid = items.value.length > 0 && items.value.every(item => item.membercelula !== null);
-
-        const selectedIds = items.value.map(item => item.membercelula?.id).filter(id => id != null);
-        const hasDuplicates = new Set(selectedIds).size !== selectedIds.length;
-
-        return isSharedValid && areItemsValid && !hasDuplicates;
+        const areItemsValid = selectedMemberCelulas.value.length > 0;
+        return isSharedValid && areItemsValid;
       }
     });
 
@@ -125,10 +106,7 @@ export default defineComponent({
       isEdit,
       sharedPlanificacion,
       sharedFecha,
-      items,
-      addItem,
-      removeItem,
-      getAvailableMemberCelulas,
+      selectedMemberCelulas, // Expose to template
       isFormValid,
       previousState,
       isSaving,
@@ -158,11 +136,12 @@ export default defineComponent({
         }
       } else {
         try {
-          const promises = this.items.map(item => {
+          // Iterate over the array of selected members
+          const promises = this.selectedMemberCelulas.map(member => {
             const newAttendance = new Attendance();
             newAttendance.fecha = currentDate as any;
             newAttendance.planificacion = this.sharedPlanificacion as any;
-            newAttendance.membercelula = item.membercelula as any;
+            newAttendance.membercelula = member; // Assign the selected member
             return this.attendanceService().create(newAttendance);
           });
 
