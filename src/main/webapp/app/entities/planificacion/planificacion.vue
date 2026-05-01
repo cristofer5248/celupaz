@@ -62,7 +62,7 @@
             <td>
               <div v-if="planificacion.almahistory">
                 <router-link :to="{ name: 'AlmaHistoryView', params: { almaHistoryId: planificacion.almahistory.id } }">{{
-                  planificacion.almahistory.id
+                  planificacion.almahistory.alma.name
                 }}</router-link>
               </div>
             </td>

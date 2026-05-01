@@ -152,8 +152,10 @@ public class PlanificacionResource {
         LOG.debug("REST request to get a page of Planificacions");
         Page<Planificacion> page;
         if (eagerload) {
+            LOG.debug("ENTRO A getAllPlanificacions findAllWithEagerRelationships");
             page = planificacionService.findAllWithEagerRelationships(pageable);
         } else {
+            LOG.debug("ENTRO A  getAllPlanificacions findAll");
             page = planificacionService.findAll(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

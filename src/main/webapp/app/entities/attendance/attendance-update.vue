@@ -5,42 +5,16 @@
         <h2 id="celupazmasterApp.attendance.home.createOrEditLabel" data-cy="AttendanceCreateUpdateHeading">
           {{ t$('celupazmasterApp.attendance.home.createOrEditLabel') }}
         </h2>
-        <div>
-          <div class="mb-3" v-if="attendance.id">
+
+        <!-- EDIT MODE -->
+        <div v-if="isEdit">
+          <div class="mb-3">
             <label for="id">{{ t$('global.field.id') }}</label>
             <input type="text" class="form-control" id="id" name="id" v-model="attendance.id" readonly />
           </div>
           <div class="mb-3">
-            <label class="form-control-label" for="attendance">{{ t$('celupazmasterApp.attendance.fecha') }}</label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="attendance-fecha"
-                  v-model="v$.fecha.$model"
-                  name="fecha"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="attendance-fecha"
-                data-cy="fecha"
-                type="text"
-                class="form-control"
-                name="fecha"
-                :class="{ valid: !v$.fecha.$invalid, invalid: v$.fecha.$invalid }"
-                v-model="v$.fecha.$model"
-                required
-              />
-            </b-input-group>
-            <div v-if="v$.fecha.$anyDirty && v$.fecha.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.fecha.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
+            <label class="form-control-label">{{ t$('celupazmasterApp.attendance.fecha') }}</label>
+            <span class="form-control-plaintext font-weight-bold">{{ sharedFecha }}</span>
           </div>
           <div class="mb-3">
             <label class="form-control-label" for="attendance">{{ t$('celupazmasterApp.attendance.membercelula') }}</label>
@@ -61,7 +35,7 @@
                 v-for="memberCelulaOption in memberCelulas"
                 :key="memberCelulaOption.id"
               >
-                {{ memberCelulaOption.id }}
+                {{ memberCelulaOption.member.name }}
               </option>
             </select>
           </div>
@@ -84,11 +58,73 @@
                 v-for="planificacionOption in planificacions"
                 :key="planificacionOption.id"
               >
-                {{ planificacionOption.fecha }}
+                {{ planificacionOption.planiMaster.fecha }}
               </option>
             </select>
           </div>
         </div>
+
+        <!-- CREATE MODE -->
+        <div v-else>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Datos Comunes</h5>
+              <div class="mb-3">
+                <label class="form-control-label">{{ t$('celupazmasterApp.attendance.fecha') }}</label>
+                <span class="form-control-plaintext font-weight-bold">{{ sharedFecha }}</span>
+              </div>
+              <div class="mb-3">
+                <label class="form-control-label" for="shared-planificacion">{{ t$('celupazmasterApp.attendance.planificacion') }}</label>
+                <select class="form-control" id="shared-planificacion" name="sharedPlanificacion" v-model="sharedPlanificacion" required>
+                  <option :value="null">Seleccione una planificación...</option>
+                  <option :value="planificacionOption" v-for="planificacionOption in planificacions" :key="planificacionOption.id">
+                    {{ planificacionOption.planiMaster.fecha }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title mb-0">Asistentes</h5>
+                <button type="button" class="btn btn-success btn-sm" @click="addItem()">
+                  <font-awesome-icon icon="plus"></font-awesome-icon>&nbsp;<span>Agregar</span>
+                </button>
+              </div>
+
+              <div v-for="(item, index) in items" :key="index" class="row align-items-end mb-3 pb-3 border-bottom">
+                <div class="col-md-10">
+                  <label class="form-control-label">{{ t$('celupazmasterApp.attendance.membercelula') }}</label>
+                  <select class="form-control" v-model="item.membercelula" required>
+                    <option :value="null">Seleccione un miembro...</option>
+                    <option
+                      :value="memberCelulaOption"
+                      v-for="memberCelulaOption in getAvailableMemberCelulas(index)"
+                      :key="memberCelulaOption.id"
+                    >
+                      {{ memberCelulaOption.member.name }}
+                    </option>
+                    <!-- Also include currently selected one to show it -->
+                    <option
+                      v-if="item.membercelula && !getAvailableMemberCelulas(index).find(mc => mc.id === item.membercelula.id)"
+                      :value="item.membercelula"
+                    >
+                      {{ item.membercelula.member.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-danger w-100" @click="removeItem(index)" :disabled="items.length === 1">
+                    <font-awesome-icon icon="trash"></font-awesome-icon>&nbsp;<span>Quitar</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" @click="previousState()">
             <font-awesome-icon icon="ban"></font-awesome-icon>&nbsp;<span>{{ t$('entity.action.cancel') }}</span>
@@ -97,7 +133,7 @@
             type="submit"
             id="save-entity"
             data-cy="entityCreateSaveButton"
-            :disabled="v$.$invalid || isSaving"
+            :disabled="!isFormValid || isSaving"
             class="btn btn-primary"
           >
             <font-awesome-icon icon="save"></font-awesome-icon>&nbsp;<span>{{ t$('entity.action.save') }}</span>

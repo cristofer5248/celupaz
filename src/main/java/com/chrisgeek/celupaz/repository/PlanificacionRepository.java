@@ -27,7 +27,11 @@ public interface PlanificacionRepository extends JpaRepository<Planificacion, Lo
     }
 
     @Query(
-        value = "select planificacion from Planificacion planificacion left join fetch planificacion.privilege left join fetch planificacion.planiMaster",
+        value = "select planificacion from Planificacion planificacion " +
+            "left join fetch planificacion.privilege " +
+            "left join fetch planificacion.planiMaster " +
+            "left join fetch planificacion.almahistory ah " +
+            "left join fetch ah.alma ",
         countQuery = "select count(planificacion) from Planificacion planificacion"
     )
     Page<Planificacion> findAllWithToOneRelationships(Pageable pageable);

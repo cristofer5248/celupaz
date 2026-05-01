@@ -29,7 +29,8 @@ public class Planificacion implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "alma", "cell", "rolcelula" }, allowSetters = true)
+    //    @JsonIgnoreProperties(value = { "alma", "cell", "rolcelula" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "cell", "rolcelula" }, allowSetters = true)
     private AlmaHistory almahistory;
 
     @ManyToOne(fetch = FetchType.LAZY)
