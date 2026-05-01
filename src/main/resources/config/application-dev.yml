@@ -35,7 +35,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mariadb://localhost:3306/celupaz1?useLegacyDatetimeCode=false
+    url: jdbc:mysql://avnadmin:AVNS_6eO3nZ7SL63fwL1tH4h@mysql-2350e9a9-crisclash52-6c0d.l.aivencloud.com:18148/celupaz1?useLegacyDatetimeCode=false
     hikari:
       poolName: Hikari
       auto-commit: false
