@@ -18,3 +18,5 @@ primary_region = 'iad'
   memory_mb = 1024 # Mantener 1GB es buena idea para Java
   cpu_kind = 'shared'
   cpus = 1
+[processes]
+  app = "java -jar /app/*.jar --spring.profiles.active=dev"
