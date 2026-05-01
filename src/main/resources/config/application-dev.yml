@@ -23,7 +23,7 @@ logging:
 spring:
   docker:
     compose:
-      enabled: false
+      enabled: true
   devtools:
     restart:
       enabled: true
