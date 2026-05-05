@@ -35,7 +35,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://avnadmin:AVNS_6eO3nZ7SL63fwL1tH4h@mysql-2350e9a9-crisclash52-6c0d.l.aivencloud.com:18148/celupaz1?useLegacyDatetimeCode=false
+    url: jdbc:mysql://mysql-2350e9a9-crisclash52-6c0d.l.aivencloud.com:18148/celupaz1?sessionVariables=sql_require_primary_key=OFF
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -47,6 +48,10 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev
+    parameters:
+      blobType: longblob
+      uuidType: binary(16)
+      datetimeType: datetime
   mail:
     host: sandbox.smtp.mailtrap.io
     username: f2f3b4131af12f
