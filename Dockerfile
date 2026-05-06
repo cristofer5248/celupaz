@@ -2,7 +2,7 @@
 FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
 WORKDIR /app
 
-# Instalar Node.js 20.x de forma eficiente
+# 1. Instalar Node.js (Necesario para compilar el frontend de JHipster)
 RUN apt-get update && \
     apt-get install -y ca-certificates curl gnupg && \
     mkdir -p /etc/apt/keyrings && \
@@ -13,31 +13,35 @@ RUN apt-get update && \
     apt-get install nodejs -y && \
     apt-get clean
 
-# Cachear dependencias de Maven (acelera builds posteriores)
+# 2. Copiar archivos necesarios para descargar dependencias (Aprovecha el caché de capas)
 COPY pom.xml .
-RUN ./mvnw dependency:go-offline -B
-
-# Copiar código fuente
-COPY . .
+COPY .mvn .mvn
+COPY mvnw .
 RUN chmod +x mvnw
 
-# Empaquetar para producción (-Pprod compila el frontend y lo inyecta en el JAR)
+# 3. Descargar dependencias de Maven (Esto se saltará en futuros builds si no cambias el pom.xml)
+RUN ./mvnw dependency:go-offline -B
+
+# 4. Copiar el resto del código fuente y compilar para PRODUCCIÓN
+# El perfil -Pprod compila el frontend (Angular/React/Vue) y lo mete en el JAR
+COPY . .
 RUN ./mvnw clean package -DskipTests -Pprod
 
 # STAGE 2: Run
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
-# Configuración de variables de entorno para la JVM
-# -XX:+UseContainerSupport: Hace que la JVM respete los límites de Docker
-# -XX:MaxRAMPercentage=75: Usa el 75% de los 512MB para el Heap (aprox 384MB)
+# 5. Optimización de Memoria para los 512MB de Render
+# Usamos MaxRAMPercentage para que la JVM se ajuste automáticamente al contenedor
 ENV JAVA_OPTS="-Xms256m -Xmx384m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
 
-# Copiar el archivo JAR generado
+# 6. Copiar solo el artefacto final desde el stage de Build
 COPY --from=build /app/target/*.jar app.jar
 
-# Exponer el puerto
+# Informar el puerto (Render detectará esto automáticamente)
 EXPOSE 8080
 
-# Ejecución con perfil 'prod' y puerto dinámico de Render
+# 7. Ejecución final
+# Se usa 'sh -c' para que la variable $PORT de Render funcione correctamente
+# Se activa el perfil 'prod' para usar MySQL según tu application-prod.yml
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar --spring.profiles.active=prod --server.address=0.0.0.0 --server.port=${PORT:-8080}"]
