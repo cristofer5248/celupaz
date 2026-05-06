@@ -2,18 +2,24 @@
 FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
 WORKDIR /app
 
-# Instalar Node.js (Necesario para compilar el frontend de JHipster)
+# Instalar Node.js (Versión 20.x LTS es la recomendada para JHipster actual)
 RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -sL https://nodesource.com | bash - && \
-    apt-get install -y nodejs && \
+    apt-get install -y ca-certificates curl gnupg && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    NODE_MAJOR=20 && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install nodejs -y && \
     apt-get clean
 
 # Copiar código y dar permisos al wrapper de Maven
 COPY . .
 RUN chmod +x mvnw
 
-# Empaquetar la aplicación con perfil dev (incluye H2 y recursos de desarrollo)
+# Empaquetar la aplicación con perfil dev
+# Nota: Si vas a producción real, lo ideal sería -Pprod, 
+# pero mantengo -Pdev por tu configuración de H2.
 RUN ./mvnw clean package -DskipTests -Pdev
 
 # STAGE 2: Run
@@ -23,12 +29,8 @@ WORKDIR /app
 # Copiar el archivo JAR generado
 COPY --from=build /app/target/*.jar app.jar
 
-# Informar el puerto (JHipster usa 8080 por defecto)
+# Puerto por defecto de JHipster
 EXPOSE 8080
 
-# Configuración de ejecución optimizada para los 512MB de Render:
-# -Xmx384m: Límite máximo de memoria para la JVM (deja espacio para el SO)
-# --spring.profiles.active=dev: Activa el perfil de desarrollo
-# --server.address=0.0.0.0: Permite conexiones externas
-# --server.port=8080: Forzamos el puerto 8080
+# Configuración optimizada para Render (512MB)
 ENTRYPOINT ["java", "-Xmx384m", "-Xms256m", "-jar", "app.jar", "--spring.profiles.active=dev", "--server.address=0.0.0.0", "--server.port=8080"]
