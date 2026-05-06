@@ -32,5 +32,4 @@ COPY --from=build /app/target/*.jar app.jar
 # Puerto por defecto de JHipster
 EXPOSE 8080
 
-# Configuración optimizada para Render (512MB)
-ENTRYPOINT ["java", "-Xmx384m", "-Xms256m", "-jar", "app.jar", "--spring.profiles.active=dev", "--server.address=0.0.0.0", "--server.port=8080"]
+ENTRYPOINT ["java", "-Xmx384m", "-Xms256m", "-jar", "app.jar", "--spring.profiles.active=dev", "--server.address=0.0.0.0", "--server.port=${PORT:-8080}"]
